@@ -1,3 +1,5 @@
+import random
+
 bo = [
     [3, 0, 2, 0, 5, 0, 6, 0, 0],
     [0, 0, 0, 0, 0, 3, 0, 0, 0],
@@ -110,8 +112,56 @@ def solve(board):
                 bo[pos[0]][pos[1]] = 0  # If solution is wrong - delete number from position and try the next number.
         return False
 
+def initBoard(new):
+    """
+           parameters: int board[9][9]
+           return empty board
+       """
+    for i in range(9):
+        for j in range(9):
+            new[i][j] = 0
+    return new
 
-printBoard(bo)
-print("Solution:")
-solve(bo)
-printBoard(bo)
+
+def sudokuGenerator(new):
+    """
+           parameters: int board[9][9]
+
+           return new soduko board board
+       """
+    board = initBoard(new)
+
+    numbers = 15
+    numbersDone = 0
+
+    while numbersDone < numbers:
+
+        x = random.randint(1, 8)
+        y = random.randint(1, 8)
+        number = random.randint(1, 9)
+
+        if board[x][y] == 0:
+            board[x][y] = number
+            if not checkValid(board,number,(x,y)):
+                board[x][y] = 0
+            else:
+                numbersDone += 1
+
+    return board
+
+
+done = True
+new = sudokuGenerator(bo)
+printBoard(new)
+while done :
+    print("Press 1 to solve! \nPress 2 for a new board! \n")
+    user = input()
+    if user == '1' : break
+    if user == '2' :
+        new = sudokuGenerator(bo)
+        printBoard(new)
+        print("Board Rotated!")
+    else: break
+
+solve(new)
+printBoard(new)
