@@ -12,6 +12,11 @@ bo = [
 
 
 def printBoard(board):
+    """
+        parameters: int board[9][9]
+        prints the board
+        return none
+    """
     for i in range(len(board[0])):
         if i % 3 == 0 :
             print("- - - - - - - - - - - - -")
@@ -26,6 +31,11 @@ def printBoard(board):
 
 
 def emptyPosition(board):
+    """
+        parameters: int board[9][9]
+        Find and return an empty position on board in coordinate of (x,y)
+        return (x,y)
+    """
     for i in range(len(board[0])):
         for j in range(len(board[0])):
             if board[i][j] == 0:
@@ -34,6 +44,11 @@ def emptyPosition(board):
 
 
 def checkRow(board, num, position):
+    """
+        parameters: (int board[9][9] , int num , int position[2])
+        return bool
+    """
+
     for i in range(len(board[0])):
         if num == board[position[0]][i] and position[1] != i:
             return False
@@ -41,6 +56,10 @@ def checkRow(board, num, position):
 
 
 def checkCol(board, num, position):
+    """
+        parameters: (int board[9][9] , int num , int position[2])
+        return bool
+    """
     for i in range(len(board[0])):
         if num == board[i][position[1]] and position[0] != i:
             return False
@@ -48,6 +67,10 @@ def checkCol(board, num, position):
 
 
 def checkBox(board, num, position):
+    """
+        parameters: (int board[9][9] , int num , int position[2])
+        return bool
+    """
     boxX = position[0] // 3
     boxY = position[1] // 3
     for i in range(boxX*3,boxX*3 + 3):
@@ -58,6 +81,11 @@ def checkBox(board, num, position):
 
 
 def checkValid(board, num, position):
+    """
+        parameters: (int board[9][9] , int num , int position[2])
+        Check for num and position if row,col and box does not already contain the number.
+        return bool
+    """
     if checkBox(board, num, position) and checkCol(board, num, position) and checkRow(board, num, position):
         return True
     else:
@@ -65,6 +93,11 @@ def checkValid(board, num, position):
 
 
 def solve(board):
+    """
+        parameters: int board[9][9]
+        find and solve the sudoku board input
+        return solved board
+    """
     pos = emptyPosition(bo)
     if not pos:  # If no empty place - board is full
         return True
@@ -76,7 +109,6 @@ def solve(board):
                     return True
                 bo[pos[0]][pos[1]] = 0  # If solution is wrong - delete number from position and try the next number.
         return False
-
 
 
 printBoard(bo)
