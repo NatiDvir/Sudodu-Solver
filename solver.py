@@ -127,7 +127,7 @@ def sudokuGenerator(new):
     """
            parameters: int board[9][9]
 
-           return new soduko board board
+           return new soduko board 
        """
     board = initBoard(new)
 
@@ -151,8 +151,8 @@ def sudokuGenerator(new):
 
 
 done = True
-new = sudokuGenerator(bo)
-printBoard(new)
+new = bo
+printBoard(bo)
 while done :
     print("Press 1 to solve! \nPress 2 for a new board! \n")
     user = input()
